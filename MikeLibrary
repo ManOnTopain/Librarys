@@ -1,0 +1,263 @@
+
+
+local ScreenGui = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local MainPart = Instance.new("Frame")
+local Tabs = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local UIListLayout_2 = Instance.new("UIListLayout")
+
+
+ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+
+
+
+
+
+
+
+
+Main.Name = "Main"
+Main.Parent = ScreenGui
+Main.BackgroundColor3 = Color3.fromRGB(72, 72, 72)
+Main.BackgroundTransparency = 0.500
+Main.Position = UDim2.new(0, 0, -0.0803213194, 0)
+Main.Size = UDim2.new(1, 0, 1.08032131, 0)
+Main.Visible = false
+
+MainPart.Name = "MainPart"
+MainPart.Parent = Main
+MainPart.Active = true
+MainPart.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+MainPart.Position = UDim2.new(0.0110998992, 0, 0.105947956, 0)
+MainPart.Size = UDim2.new(0.118062563, 0, 0.0315985121, 0)
+
+Tabs.Name = "Tabs"
+Tabs.Parent = MainPart
+Tabs.Active = true
+Tabs.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+Tabs.Position = UDim2.new(0, 0, 1.00000048, 0)
+Tabs.Size = UDim2.new(1, 0, 14.2800493, 0)
+
+
+UIListLayout.Parent = Tabs
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+
+
+
+local fake_module_scripts = {}
+
+do -- ScreenGui.Configuration
+	local script = Instance.new('ModuleScript', ScreenGui)
+	script.Name = "Configuration"
+	local function module_script()
+		local Configuration = {}
+
+		Configuration.RunKey = Enum.KeyCode.LeftAlt
+
+		Configuration.WalkSpeed = 16
+		Configuration.RunSpeed = 25
+
+		Configuration.WalkFov = 70
+		Configuration.RunFov = 80
+		Configuration.TweenFovDuration = 0.2 
+
+		return Configuration
+
+	end
+	fake_module_scripts[script] = module_script
+end
+
+
+-- Scripts:
+
+local function VHRVXRO_fake_script() -- ScreenGui.Keybind 
+	local script = Instance.new('LocalScript', ScreenGui)
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+
+
+	local player = game.Players.LocalPlayer
+	local main = Main
+	local open = false
+
+	local camera = game.Workspace.CurrentCamera
+
+	local UIS = game:GetService("UserInputService")
+	local TweenService = game:GetService("TweenService")
+
+	local Configuration = require(script.Parent:WaitForChild("Configuration"))
+
+
+
+	UIS.InputBegan:Connect(function(key, proccess)
+		if key.KeyCode == Configuration.RunKey then
+			if open == false then
+				main.Visible = true
+				open = true
+			else
+				main.Visible = false
+				open = false
+			end
+		end
+	end)
+
+
+end
+coroutine.wrap(VHRVXRO_fake_script)()
+local function EFFYSQ_fake_script() -- MainPart.Draggable 
+	local script = Instance.new('LocalScript', MainPart)
+	local req = require
+	local require = function(obj)
+		local fake = fake_module_scripts[obj]
+		if fake then
+			return fake()
+		end
+		return req(obj)
+	end
+
+	script.Parent.Draggable = true
+end
+coroutine.wrap(EFFYSQ_fake_script)()
+
+
+
+_G.Main = {}
+function _G.Main:NewTab(Title)
+	_G.Tab = {}
+	local TabMainFrame = Instance.new("ScrollingFrame")
+	TabMainFrame.Name = Title
+	TabMainFrame.Parent = Main
+	TabMainFrame.Active = true
+	TabMainFrame.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+	TabMainFrame.Position = UDim2.new(0.179375067, 0, 0.104089245, 0)
+	TabMainFrame.Size = UDim2.new(0.118177615, 0, 0.48468551, 0)
+	TabMainFrame.Visible = false
+	TabMainFrame.Draggable = true
+	UIListLayout_2.Parent = TabMainFrame
+	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+	function _G.Tab:Button(Name, Call)
+		local TextButton_2 = Instance.new("TextButton")
+		TextButton_2.Parent = TabMainFrame
+		TextButton_2.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+		TextButton_2.Position = UDim2.new(-1.30290033e-07, 0, 0, 0)
+		TextButton_2.Size = UDim2.new(0, 103, 0, 28)
+		TextButton_2.Font = Enum.Font.SourceSans
+		TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TextButton_2.TextScaled = true
+		TextButton_2.TextSize = 14.000
+		TextButton_2.TextWrapped = true
+		TextButton_2.Name = Name
+		TextButton_2.Text = Name
+		TextButton_2.MouseButton1Click:Connect(function()
+			pcall(Call)
+			wait(0.1)
+			pcall(nil)
+		end)
+	end
+
+	
+	local TextButton = Instance.new("TextButton")
+	TextButton.Parent = Tabs
+	TextButton.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+	TextButton.Position = UDim2.new(3.96938731e-08, 0, 0, 0)
+	TextButton.Size = UDim2.new(0.998928964, 0, 0.11533986, 0)
+	TextButton.Font = Enum.Font.SourceSans
+	TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextButton.TextScaled = true
+	TextButton.TextSize = 14.000
+	TextButton.TextWrapped = true
+	TextButton.Text = Title
+	TextButton.Name = Title
+	local Enabled = false
+	TextButton.MouseButton1Click:Connect(function()
+		if Enabled == false then
+			Enabled = true
+			TabMainFrame.Visible = true
+		else
+			Enabled = false
+			TabMainFrame.Visible = false
+		end
+	end)
+	
+end
+
+function _G.Main:NewWarn(Titlee,Textt)
+	local Warning = Instance.new("Frame")
+	Warning.Name = "Warning"
+	Warning.Parent = ScreenGui
+	Warning.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+	Warning.BackgroundTransparency = 0.300
+	Warning.Position = UDim2.new(0.732593298, 0, 0.718875527, 0)
+	Warning.Size = UDim2.new(0.267406672, 0, 0.212851405, 0)
+	Warning.Visible = true
+	
+	local UICorner = Instance.new("UICorner")
+	UICorner.Parent = Warning
+	
+	local warning = Instance.new("TextLabel")
+	warning.Name = "warning"
+	warning.Parent = Warning
+	warning.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	warning.BackgroundTransparency = 1.000
+	warning.Position = UDim2.new(0.0415094346, 0, 0.264150947, 0)
+	warning.Size = UDim2.new(0.124528304, 0, 0.471698105, 0)
+	warning.Font = Enum.Font.SourceSans
+	warning.Text = "!"
+	warning.TextColor3 = Color3.fromRGB(0, 0, 0)
+	warning.TextScaled = true
+	warning.TextSize = 14.000
+	warning.TextWrapped = true
+	
+	local Space = Instance.new("TextLabel")
+	Space.Name = "Space"
+	Space.Parent = Warning
+	Space.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	Space.Position = UDim2.new(0.211320758, 0, 0.405660391, 0)
+	Space.Size = UDim2.new(0.754716992, 0, 0, 0)
+	Space.Font = Enum.Font.SourceSans
+	Space.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Space.TextSize = 14.000
+	Space.TextTransparency = 1.000
+	
+	local Title = Instance.new("TextLabel")
+	Title.Name = Titlee
+	Title.Parent = Warning
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1.000
+	Title.Position = UDim2.new(0.211320758, 0, 0.0094339624, 0)
+	Title.Size = UDim2.new(0.754716992, 0, 0.396226406, 0)
+	Title.Font = Enum.Font.SourceSans
+	Title.Text = Titlee
+	Title.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Title.TextScaled = true
+	Title.TextSize = 14.000
+	Title.TextWrapped = true
+	
+	local Text = Instance.new("TextLabel")
+	Text.Name = Textt
+	Text.Parent = Warning
+	Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Text.BackgroundTransparency = 1.000
+	Text.Position = UDim2.new(0.211320758, 0, 0.5, 0)
+	Text.Size = UDim2.new(0.788679242, 0, 0.44339627, 0)
+	Text.Font = Enum.Font.SourceSans
+	Text.Text = Textt
+	Text.TextColor3 = Color3.fromRGB(0, 0, 0)
+	Text.TextScaled = true
+	Text.TextSize = 19.000
+	Text.TextWrapped = true
+	wait(6)
+	Warning:Destroy()
+end
+
