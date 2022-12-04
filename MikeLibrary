@@ -131,7 +131,6 @@ end
 coroutine.wrap(EFFYSQ_fake_script)()
 
 
-
 _G.Main = {}
 function _G.Main:NewTab(Title)
 	_G.Tab = {}
@@ -146,26 +145,8 @@ function _G.Main:NewTab(Title)
 	TabMainFrame.Draggable = true
 	UIListLayout_2.Parent = TabMainFrame
 	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
-	function _G.Tab:Button(Name, Call)
-		local TextButton_2 = Instance.new("TextButton")
-		TextButton_2.Parent = TabMainFrame
-		TextButton_2.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
-		TextButton_2.Position = UDim2.new(-1.30290033e-07, 0, 0, 0)
-		TextButton_2.Size = UDim2.new(0, 103, 0, 28)
-		TextButton_2.Font = Enum.Font.SourceSans
-		TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
-		TextButton_2.TextScaled = true
-		TextButton_2.TextSize = 14.000
-		TextButton_2.TextWrapped = true
-		TextButton_2.Name = Name
-		TextButton_2.Text = Name
-		TextButton_2.MouseButton1Click:Connect(function()
-			pcall(Call)
-			wait(0.1)
-			pcall(nil)
-		end)
-	end
-
+	
+	
 	
 	local TextButton = Instance.new("TextButton")
 	TextButton.Parent = Tabs
@@ -190,7 +171,81 @@ function _G.Main:NewTab(Title)
 		end
 	end)
 	
+	function _G.Tab:Button(Name, Call)
+		local TextButton_2 = Instance.new("TextButton")
+		TextButton_2.Parent = Main:FindFirstChild(Title)
+		TextButton_2.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+		TextButton_2.Position = UDim2.new(-1.30290033e-07, 0, 0, 0)
+		TextButton_2.Size = UDim2.new(0, 103, 0, 28)
+		TextButton_2.Font = Enum.Font.SourceSans
+		TextButton_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TextButton_2.TextScaled = true
+		TextButton_2.TextSize = 14.000
+		TextButton_2.TextWrapped = true
+		TextButton_2.Name = Name
+		TextButton_2.Text = Name
+		TextButton_2.MouseButton1Click:Connect(function()
+			pcall(Call)
+			wait(0.1)
+			pcall(nil)
+		end)
+	end
+	
+	function _G.Tab:ToggleButton(Name, Call)
+		local TextButton_3 = Instance.new("TextButton")
+		TextButton_3.Parent = Main:FindFirstChild(Title)
+		TextButton_3.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+		TextButton_3.Position = UDim2.new(-1.30290033e-07, 0, 0, 0)
+		TextButton_3.Size = UDim2.new(0, 103, 0, 28)
+		TextButton_3.Font = Enum.Font.SourceSans
+		TextButton_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TextButton_3.TextScaled = true
+		TextButton_3.TextSize = 14.000
+		TextButton_3.TextWrapped = true
+		TextButton_3.Name = Name
+		TextButton_3.Text = Name
+
+		local On = Instance.new("BoolValue")
+		On.Name = "On"
+		On.Parent = TextButton_3
+
+		TextButton_3.MouseButton1Click:Connect(function()
+			while true do
+				wait(0.1)
+				if On.Value == false then
+					wait(0.1)
+					On.Value = true
+				else
+					wait(0.1)
+					On.Value = false
+				end
+				while true do
+					wait(0.1)
+					if On.Value == true then
+
+						wait(0.3)
+						pcall(Call)
+					else
+						pcall(nil)
+
+					end
+				end
+
+			end
+		end)
+	end	
+
 end
+
+
+
+
+
+	
+
+
+
+
 
 function _G.Main:NewWarn(Titlee,Textt)
 	local Warning = Instance.new("Frame")
@@ -260,4 +315,3 @@ function _G.Main:NewWarn(Titlee,Textt)
 	wait(6)
 	Warning:Destroy()
 end
-
