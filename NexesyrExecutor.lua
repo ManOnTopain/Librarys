@@ -56,6 +56,14 @@ execute.Visible = true
 execute.Name = "Execute"
 execute.Parent = main_2
 
+if not isfolder("NexesyrExec") then
+	makefolder("NexesyrExec")	
+end
+
+if not isfile("NexesyrExec/Script.txt") then
+	writefile("NexesyrExec/Script.txt", "--CurrentScript")
+end
+
 local uistroke_2 = Instance.new("UIStroke")
 uistroke_2.Parent = execute
 
@@ -428,9 +436,9 @@ task.spawn(function()
 		end
 		return oldreq(target)
 	end
-	
+	local CurrentSavedScript = readfile("NexesyrExec/Script.txt")
 	script.Parent.MouseButton1Click:Connect(function()
-		
+		writefile(CurrentSavedScript, main_text.Text)
 	end)
 	
 end)
@@ -446,9 +454,9 @@ task.spawn(function()
 		end
 		return oldreq(target)
 	end
-
+	local CurrentSavedScript = readfile("NexesyrExec/Script.txt")
 	script.Parent.MouseButton1Click:Connect(function()
-
+		main_text.Text = CurrentSavedScript
 	end)
 	
 end)
