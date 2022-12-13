@@ -114,6 +114,8 @@ main_text.Size = UDim2.new(0.968220353, 0, 1, 0)
 main_text.Visible = true
 main_text.Name = "MainText"
 main_text.Parent = main_text_scroll
+main_text.ClearTextOnFocus = false
+
 
 local local_script_2 = Instance.new("LocalScript")
 local_script_2.Parent = main_text
@@ -454,12 +456,17 @@ task.spawn(function()
 		end
 		return oldreq(target)
 	end
-	local CurrentSavedScript = readfile("NexesyrExec/Script.txt")
-	script.Parent.MouseButton1Click:Connect(function()
-		main_text.Text = CurrentSavedScript
-	end)
+ 
 	
+    script.Parent.MouseButton1Click:Connect(function()
+    local CurrentSavedScript = readfile("NexesyrExec/Script.txt")
+		main_text.Text = CurrentSavedScript
+    end)
 end)
+
+	
+	
+
 
 -- MainS
 task.spawn(function()
