@@ -436,9 +436,9 @@ task.spawn(function()
 		end
 		return oldreq(target)
 	end
-	local CurrentSavedScript = readfile("NexesyrExec/Script.txt")
+
 	script.Parent.MouseButton1Click:Connect(function()
-		writefile(CurrentSavedScript, main_text.Text)
+		writefile("NexesyrExec/Script.txt", main_text.Text)
 	end)
 	
 end)
