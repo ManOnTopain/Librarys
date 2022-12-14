@@ -168,6 +168,7 @@ main_text.Size = UDim2.new(0.968220353, 0, 1, 0)
 main_text.Visible = true
 main_text.Name = "MainText"
 main_text.Parent = main_text_scroll
+main_text.ClearTextOnFocus = false
 
 local local_script_3 = Instance.new("LocalScript")
 local_script_3.Parent = main_text
@@ -1185,7 +1186,7 @@ task.spawn(function()
 	end
 	
 	if not isfile("ArceusX/Script.txt") then
-		writefile("ArceusX/Script.txt", "--savedscript"
+		writefile("ArceusX/Script.txt", "--savedscript")
 	end
 	
 	if not isfile("ArceusX/MainPosition.txt") then
@@ -1195,6 +1196,7 @@ task.spawn(function()
 	if not isfile("ArceusX/ExecutorPosition.txt") then
 		writefile("ArceusX/ExecutorPosition.txt", "{1.783, 0},{-0.058, 0}")
 	end
+    
 end)
 
 -- Positions
